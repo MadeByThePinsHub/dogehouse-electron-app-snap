@@ -1,0 +1,6 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: git clone https://github.com/benawad/dogehouse && ./initDevEnv.sh
+    command: 'echo "TODO: Replace with command to start project"'
