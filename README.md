@@ -1,17 +1,15 @@
 <h1 align="center">
-  <img src="https://avatars1.githubusercontent.com/u/29598503?v=3&s=256" alt="[Project]">
+  <img src="https://github.com/benawad/dogehouse/blob/staging/feta/assets/dogehouse.png?raw=true" alt="DogeHouse">
   <br />
-  [Project]
+  DogeHouse
 </h1>
 
-<p align="center"><b>This is the snap for [Project]</b>, <i>“Single-line elevator pitch for your amazing snap”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
+<p align="center"><b>This is the snap for DogeHouse</b>, <i>“Taking voice conversations to the moon”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
-<!-- Uncomment and modify this when you are provided a build status badge
-<p align="center">
-<a href="https://build.snapcraft.io/user/snapcrafters/fork-and-rename-me"><img src="https://build.snapcraft.io/badge/snapcrafters/fork-and-rename-me.svg" alt="Snap Status"></a>
-</p>
--->
+<!-- TODO: Update the badge URLs later. -->
+[![Snapcraft Builds](https://build.snapcraft.io/badge/thepinsteam/dogehouse.svg)](https://build.snapcraft.io/user/thepinsteam/dogehouse)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/MadeByThePinsHub/dogehouse-electron-app-snap)
 
 <!-- Uncomment and modify this when you have a screenshot
 ![my-snap-name](screenshot.png?raw=true "my-snap-name")
@@ -21,7 +19,7 @@ distributions.</p>
 
 ## Install
 
-    sudo snap install my-snap-name
+    sudo snap install dogehouse
 
 <!-- Uncomment and modify this when your snap is available on the store
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/my-snap-name)
@@ -69,12 +67,11 @@ upstream so [Project] can authoritatively publish future releases.
 
 If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft.io).
 
-<!--
 ## The Snapcrafters
 
-| [![Your Name](https://gravatar.com/avatar/bc0bced65e963eb5c3a16cab8b004431/?s=128)](https://github.com/yourname/) |
+| [![Your Name](https://avatars.githubusercontent.com/u/34998342?s=460&v=4)](https://github.com/AndreiJirohHaliliDev2006) |
 | :---: |
-| [Your Name](https://github.com/yourname/) |
+| [Andrei Jiroh ](https://github.com/AndreiJirohHaliliDev2006) |
 --> 
 
 <!-- Uncomment and modify this when you have upstream contacts
