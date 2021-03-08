@@ -34,7 +34,7 @@ apps:
       # libappindicator has readable resources.
       TMPDIR: $XDG_RUNTIME_DIR
 parts:
-  electron-quick-start:
+  dogehouse:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
     override-build: |
