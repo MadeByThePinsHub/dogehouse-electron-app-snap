@@ -21,7 +21,7 @@ base: core18
 apps:
   dogehouse:
     command: dogehouse/dogehouse --no-sandbox
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-28]
     plugs:
     - network
     - network-bind
