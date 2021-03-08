@@ -6,8 +6,8 @@ description: |
   DogeCoin, to take voice-based conversations into the moon.
 
 # Since we're still testing the Electron app, we'll go into
-# the edge channel.
-grade: edge
+# the edge/devel channel.
+grade: devel
 
 # Chnage this into strict once the essentials are added
 confinement: devmode
