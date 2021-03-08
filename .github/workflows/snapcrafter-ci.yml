@@ -1,0 +1,57 @@
+name: Build and Release Snap
+ 
+on:
+  push:
+    branches:
+    - master
+ 
+jobs:
+  build-stable:
+    runs-on: ubuntu-latest
+    
+    # Let's build for many architectures..
+    strategy:
+      matrix:
+        architecture:
+        - linux/amd64
+        - linux/386
+        - linux/arm64
+        - linux/arm/v7
+    steps:
+    # Checkout the code of our Repository
+    - uses: actions/checkout@v2
+
+    # Do the build!
+    - id: build
+      run: |
+        # Enable docker daemon support for --platform parameter
+        echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json > /dev/null
+        sudo systemctl restart docker
+
+        # Configure qemu-user-static
+        docker run --rm --tty \
+          --security-opt apparmor:unconfined \
+          --cap-add SYS_ADMIN \
+          multiarch/qemu-user-static --reset -p yes
+
+        # Run snapcraft
+        docker run --rm --tty \
+          --security-opt apparmor:unconfined \
+          --cap-add SYS_ADMIN \
+          --device /dev/fuse \
+          --volume /sys \
+          --volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
+          --volume $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
+          --workdir $GITHUB_WORKSPACE \
+          --platform "${{ matrix.architecture }}" \
+          --env PLAYTEST="${{ matrix.playtest }}" \
+          diddledan/snapcraft:core18
+
+        echo ::set-output name=snap::$(find $GITHUB_WORKSPACE -maxdepth 3 -type f -name "*.snap" | head -n1)
+
+    # Release this Snap to the channel we choose.
+    #- uses: snapcore/action-publish@v1
+    #  with:
+    #    store_login: ${{ secrets.STORE_LOGIN }}
+    #    snap: ${{ steps.build.outputs.snap }}
+    #    release: beta

@@ -9,19 +9,17 @@ compression: lzo
 # Chnage this into strict once the essentials are added
 confinement: devmode
 
-# Remember to only change this two years later after the release of
-# the latest LTS.
-base: core18
+# Ensure that keep things up-to-date with the latest LTS as possible
+base: core20
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
 # and requires additional work and testing.
-apps:
+mapps:
   dogehouse:
     command: dogehouse/dogehouse --no-sandbox
     extensions: [gnome-3-34]
     plugs:
-    - browser-support
     - network
     - network-bind
     - audio-playback
@@ -40,7 +38,7 @@ parts:
         cd baklava
         npm install electron electron-packager
         npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
-        cp -rv ./dogehouse-* $SNAPCRAFT_PART_INSTALL/dogehouse
+        cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/dogehouse
     build-snaps:
     - node/14/stable
     build-packages:
