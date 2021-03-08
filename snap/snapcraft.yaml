@@ -11,7 +11,9 @@ compression: lzo
 confinement: devmode
 
 # Ensure that keep things up-to-date with the latest LTS as possible
-base: core20
+# but since Gnome 3.x wants Ububtu Core 18, we need to change that
+# ibto core18 until they support Core 20 finally.
+base: core18
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
