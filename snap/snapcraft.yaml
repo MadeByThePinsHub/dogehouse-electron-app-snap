@@ -4,6 +4,7 @@ summary: Taking conversations into the moon
 description: |
   DoegHouse is an Discord-like voice chats service, powered by
   DogeCoin, to take voice-based conversations into the moon.
+
 compression: lzo
 
 # Chnage this into strict once the essentials are added
@@ -15,7 +16,7 @@ base: core20
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
 # and requires additional work and testing.
-mapps:
+apps:
   dogehouse:
     command: dogehouse/dogehouse --no-sandbox
     extensions: [gnome-3-34]
