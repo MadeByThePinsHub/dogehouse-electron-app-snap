@@ -1,13 +1,50 @@
-name: dogehouse # you probably want to 'snapcraft register <name>'
-version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
-summary: Taking conversations into the moon # 79 char long summary
+name: dogehouse
+version: '0.1'
+summary: Taking conversations into the moon
 description: |
   DoegHouse is an Discord-like voice chats service, powered by
-  DogeCoins.
+  DogeCoin, to take voice-based conversations into the moon.
+compression: lzo
 
-confinement: devmode # use 'strict' once you have the right plugs and slots
+# Chnage this into strict once the essentials are added
+confinement: devmode
 
+# Remember to only change this two years later after the release of
+# the latest LTS.
+base: core18
+
+# WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
+# Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
+# and requires additional work and testing.
+apps:
+  dogehouse:
+    command: dogehouse/dogehouse --no-sandbox
+    extensions: [gnome-3-34]
+    plugs:
+    - browser-support
+    - network
+    - network-bind
+    - audio-playback
+    - network-status
+    - microphone
+    - x11
+    environment:
+      # Correct the TMPDIR path for Chromium Framework/Electron to ensure
+      # libappindicator has readable resources.
+      TMPDIR: $XDG_RUNTIME_DIR
 parts:
-  my-part:
-    # See 'snapcraft plugins'
+  electron-quick-start:
     plugin: nil
+    source: https://github.com/benawad/dogehouse.git
+    override-build: |
+        cd baklava
+        npm install electron electron-packager
+        npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
+        cp -rv ./dogehouse-* $SNAPCRAFT_PART_INSTALL/dogehouse
+    build-snaps:
+    - node/14/stable
+    build-packages:
+    - unzip
+    stage-packages:
+    - libnss3
+    - libnspr4
