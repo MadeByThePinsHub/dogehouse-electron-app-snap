@@ -5,7 +5,9 @@ description: |
   DoegHouse is an Discord-like voice chats service, powered by
   DogeCoin, to take voice-based conversations into the moon.
 
-compression: lzo
+# Since we're still testing the Electron app, we'll go into
+# the edge channel.
+grade: edge
 
 # Chnage this into strict once the essentials are added
 confinement: devmode
