@@ -21,10 +21,10 @@ jobs:
     # Clean up stuff
     - name: Cleaning stuff first
       run: |
-	sudo rm -rf /usr/share/dotnet
-	sudo rm -rf /opt/ghc
-	sudo rm -rf "/usr/local/share/boost"
-	sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
     # Checkout the code of our Repository
     - uses: actions/checkout@v2
