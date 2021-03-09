@@ -41,9 +41,11 @@ parts:
   dogehouse:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
+    build-environment:
+    - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
         cd baklava
-        npm install electron electron-packager
+        npm install --production=false
         npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
         cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/dogehouse
     build-snaps:
