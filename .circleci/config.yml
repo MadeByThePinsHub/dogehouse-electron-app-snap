@@ -38,9 +38,11 @@ workflows:
   main:
     jobs:
       - build
-      # - publish:
-      #    requires:
-      #      - build
-      #    filters:
-      #      branches:
-      #        only: master
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+          context:
+            - snapcraft-stuff
