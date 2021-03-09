@@ -15,7 +15,7 @@ confinement: devmode
 # Ensure that keep things up-to-date with the latest LTS as possible
 # but since Gnome 3.x wants Ububtu Core 18, we need to change that
 # ibto core18 until they support Core 20 finally.
-base: core18
+base: core20
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
@@ -23,7 +23,9 @@ base: core18
 apps:
   dogehouse:
     command: dogehouse/dogehouse --no-sandbox
-    extensions: [gnome-3-28]
+    # but actually there's it!
+    # just make sure you update your base inti core20
+    extensions: [gnome-3-28-2004]
     plugs:
     - network
     - network-bind
