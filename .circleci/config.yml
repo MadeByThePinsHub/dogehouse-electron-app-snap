@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cibuilds/snapcraft:stable
+      - image: cibuilds/snapcraft:core18
         #auth:
         # username: mydockerhub-user
         # password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -18,7 +18,7 @@ jobs:
 
   publish:
     docker:
-      - image: cibuilds/snapcraft:stable
+      - image: cibuilds/snapcraft:core18
         #auth:
         #  username: mydockerhub-user
         #  password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
