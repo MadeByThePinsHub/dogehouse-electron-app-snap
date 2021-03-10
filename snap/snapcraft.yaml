@@ -25,14 +25,15 @@ apps:
     command: dogehouse/dogehouse --no-sandbox
     # but actually there's it!
     # just make sure you update your base inti core20
+    # But no, Linus lied. Blame Snapcraft devs why.
     extensions: [gnome-3-28]
     plugs:
-    - network
-    - network-bind
-    - audio-playback
-    - network-status
-    - microphone
-    - x11
+      - network
+      - network-bind
+      - audio-playback
+      - network-status
+      - audio-record
+      - x11
     environment:
       # Correct the TMPDIR path for Chromium Framework/Electron to ensure
       # libappindicator has readable resources.
@@ -42,7 +43,7 @@ parts:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
     build-environment:
-    - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
+      - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
         cd baklava
         npm install --production=false
