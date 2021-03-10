@@ -22,7 +22,7 @@ base: core18
 # and requires additional work and testing.
 apps:
   dogehouse:
-    command: dogehouse/dogehouse --no-sandbox
+    command: dogehouse/Dogehouse --no-sandbox
     # but actually there's it!
     # just make sure you update your base into core20
     # But no, Linus has lied to Ben, again. Blame Snapcraft devs why.
