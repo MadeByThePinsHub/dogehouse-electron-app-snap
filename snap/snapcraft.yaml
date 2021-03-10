@@ -14,7 +14,7 @@ confinement: devmode
 
 # Ensure that keep things up-to-date with the latest LTS as possible
 # but since Gnome 3.x wants Ububtu Core 18, we need to change that
-# ibto core18 until they support Core 20 finally.
+# into core18 until they support Core 20 finally.
 base: core18
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
@@ -24,8 +24,8 @@ apps:
   dogehouse:
     command: dogehouse/dogehouse --no-sandbox
     # but actually there's it!
-    # just make sure you update your base inti core20
-    # But no, Linus lied. Blame Snapcraft devs why.
+    # just make sure you update your base into core20
+    # But no, Linus has lied to Ben, again. Blame Snapcraft devs why.
     extensions: [gnome-3-28]
     plugs:
       - network
@@ -45,6 +45,17 @@ parts:
     build-environment:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
+        PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
+        npm config set unsafe-perm True
+
+        # workaround for build.snapcraft.io builds
+        # https://bugs.launchpad.net/bugs/1886861
+        if [ -n "$http_proxy" ]; then
+           export ELECTRON_GET_USE_PROXY=1
+           export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
+           export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
+        fi
+
         cd baklava
         npm install --production=false
         npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
