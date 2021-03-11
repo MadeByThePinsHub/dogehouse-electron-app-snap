@@ -17,12 +17,25 @@ confinement: devmode
 # into core18 until they support Core 20 finally.
 base: core18
 
+# No 32-bit (i386) support as per git-branch:new-design:
+# baklava/package.json scripts, but let's try if it's works.
+architectures:
+  - build-on: amd64
+    run-on: amd64
+  - build-on: arm64
+    run-on: arm64
+  # build-error included so CI don't fails if failed to
+  # build i386 snaps.
+  - build-on: i386
+    run-on: i386
+    build-error: ignore
+
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
 # and requires additional work and testing.
 apps:
   dogehouse:
-    command: dogehouse/Dogehouse --no-sandbox
+    command: DogeHouse/DogeHouse --no-sandbox
     # but actually there's it!
     # just make sure you update your base into core20
     # But no, Linus has lied to Ben, again. Blame Snapcraft devs why.
@@ -56,10 +69,14 @@ parts:
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
         fi
 
+        # build stuff goes here
         cd baklava
         npm install --production=false
         npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
-        cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/dogehouse
+        cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
+
+        # for validation purposes only
+        ls $SNAPCRAFT_PART_INSTALL -al && ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al
     build-snaps:
     - node/14/stable
     build-packages:
