@@ -24,11 +24,6 @@ architectures:
     run-on: amd64
   - build-on: arm64
     run-on: arm64
-  # build-error included so CI don't fails if failed to
-  # build i386 snaps.
-  - build-on: i386
-    run-on: i386
-    build-error: ignore
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
