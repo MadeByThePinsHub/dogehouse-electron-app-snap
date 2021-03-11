@@ -38,7 +38,7 @@ upstream so [Project] can authoritatively publish future releases.
   - [x] Click the green "Use this template" button above to create a new repository based on this template
   - [x] Give the newly created repository a sensible name, like `godzilla-snap` if you're snapping the Godzilla software
   - [x] Update the description of the repository
-  - [ ] Update logos and references to `[Project]` and `[my-snap-name]`
+  - [X] Update logos and references to `[Project]` and `[my-snap-name]`
   - [x] Create a snap that runs in `devmode`
   - [x] Register the snap in the store, **using the preferred upstream name**
   - [ ] Add a screenshot to this `README.md`
@@ -67,15 +67,12 @@ If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft
 
 ## The Snapcrafters
 
-| [![Your Name](https://avatars.githubusercontent.com/u/34998342?s=460&v=4)](https://github.com/AndreiJirohHaliliDev2006) |
+| [![Your Name](https://avatars.githubusercontent.com/u/34998342)](https://github.com/AndreiJirohHaliliDev2006) |
 | :---: |
 | [Andrei Jiroh ](https://github.com/AndreiJirohHaliliDev2006) |
---> 
 
-<!-- Uncomment and modify this when you have upstream contacts
-## Upstream
+## Upstream Maintainers
 
-| [![Upstream Name](https://gravatar.com/avatar/bc0bced65e963eb5c3a16cab8b004431?s=128)](https://github.com/upstreamname) |
+| [![Upstream Name](https://avatars.githubusercontent.com/u/7872329)](https://github.com/benawad) |
 | :---: |
-| [Upstream Name](https://github.com/upstreamname) |
--->
+| [Ben Awad](https://github.com/benawad) |
