@@ -4,12 +4,13 @@
   DogeHouse
 </h1>
 
-<p align="center"><b>This is the snap for DogeHouse</b>, <i>“Taking voice conversations to the moon”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
+<p align="center"><b>This is the snap for DogeHouse</b>, <i>“taking voice conversations to the moon”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
 <!-- TODO: Update the badge URLs later. -->
 [![Snapcraft Builds](https://build.snapcraft.io/badge/thepinsteam/dogehouse.svg)](https://build.snapcraft.io/user/thepinsteam/dogehouse)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/MadeByThePinsHub/dogehouse-electron-app-snap)
+[![dogehouse](https://snapcraft.io/dogehouse/badge.svg)](https://snapcraft.io/dogehouse)
 
 <!-- Uncomment and modify this when you have a screenshot
 ![my-snap-name](screenshot.png?raw=true "my-snap-name")
@@ -19,8 +20,15 @@ distributions.</p>
 
 ## Install
 
-    sudo snap install dogehouse
+```sh
+## install the app
+sudo snap install dogehouse
 
+## some interfaces require manual connection until
+## we got approval auto-connection on install time
+sudo snap connect dogehouse:pluseaudio :pluseaudio
+sudo snap connect dogehouse:system-observe :system-observe
+```
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/dogehouse)
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
@@ -32,8 +40,8 @@ distributions.</p>
 
 Snapcrafters ([join us](https://forum.snapcraft.io/t/join-snapcrafters/1325)) 
 are working to land snap install documentation and
-the [snapcraft.yaml](https://github.com/snapcrafters/fork-and-rename-me/blob/master/snap/snapcraft.yaml)
-upstream so [Project] can authoritatively publish future releases.
+the [snapcraft.yaml](https://github.com/MadeByThePinsHub/dogehouse-electron-app-snap/blob/master/snap/snapcraft.yaml)
+upstream so DogeHouse can authoritatively publish future releases.
 
   - [x] Click the green "Use this template" button above to create a new repository based on this template
   - [x] Give the newly created repository a sensible name, like `godzilla-snap` if you're snapping the Godzilla software
@@ -42,8 +50,8 @@ upstream so [Project] can authoritatively publish future releases.
   - [x] Create a snap that runs in `devmode`
   - [x] Register the snap in the store, **using the preferred upstream name**
   - [ ] Add a screenshot to this `README.md`
-  - [ ] Publish the `devmode` snap in the Snap store edge channel
-  - [ ] Add install instructions to this `README.md`
+  - [X] Publish the `devmode` snap in the Snap store edge channel
+  - [x] Add install instructions to this `README.md`
   - [ ] Update snap store metadata, icons and screenshots
   - [ ] Convert the snap to `strict` confinement, or `classic` confinement if it qualifies
   - [ ] Publish the confined snap in the Snap store beta channel
@@ -73,6 +81,6 @@ If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft
 
 ## Upstream Maintainers
 
-| [![Upstream Name](https://avatars.githubusercontent.com/u/7872329)](https://github.com/benawad) |
+| [![Ben Awad](https://avatars.githubusercontent.com/u/7872329)](https://github.com/benawad) |
 | :---: |
 | [Ben Awad](https://github.com/benawad) |

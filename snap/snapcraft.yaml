@@ -37,11 +37,11 @@ apps:
     extensions: [gnome-3-28]
     plugs:
       - network
-      - network-bind
-      - audio-playback
-      - network-status
-      - audio-record
+      - network-observe
+      - pluseaudio
+      - system-observe
       - x11
+      - desktop
     environment:
       # Correct the TMPDIR path for Chromium Framework/Electron to ensure
       # libappindicator has readable resources.
@@ -50,6 +50,7 @@ parts:
   dogehouse:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
+    source-branch: staging
     build-environment:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
