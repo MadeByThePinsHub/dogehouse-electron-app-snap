@@ -2,10 +2,9 @@
 /parts/
 /stage/
 /prime/
-
 *.snap
-
 .snapcraft
+
 __pycache__
 *.pyc
 *_source.tar.bz2
