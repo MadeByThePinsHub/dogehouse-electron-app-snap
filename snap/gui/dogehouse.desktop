@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=DogeHouse
+Comment=Taking voice conversations to the moon 🚀
+GenericName=Social
+Exec=dogehouse
+Icon=${SNAP}/usr/share/pixmaps/icon.png
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Social;
+MimeType=text/plain;
+StartupWMClass=dogehouse

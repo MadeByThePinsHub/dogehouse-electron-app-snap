@@ -71,10 +71,18 @@ parts:
 
         # for validation purposes only
         ls $SNAPCRAFT_PART_INSTALL -al && ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al
+
+        # Desktop Icons stuff
+        cp ./icons/icon.png ${SNAP}/usr/share/pixmaps/icon.png
+        curl -o- https://raw.githubusercontent.com/MadeByThePinsHub/dogehouse-electron-app-snap/snap/gui/dogehouse.desktop > dogehouse.desktop
+        mv dogehouse.desktop $SNAPCRAFT_PART_INSTALL/usr/share/applications/dogehouse.desktop
+        sed -i 's|Icon=dogehouse|Icon=${SNAP}/usr/share/pixmaps/icon\.png|g' $SNAPCRAFT_PART_INSTALL/usr/share/applications/dogehouse.desktop
     build-snaps:
     - node/14/stable
     build-packages:
     - unzip
+    - libcurl4
+    - wget
     stage-packages:
     - libnss3
     - libnspr4
