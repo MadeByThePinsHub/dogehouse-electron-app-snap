@@ -8,6 +8,8 @@ include:
 
 # Build process
 snapcraft:amd64:
+  before_script:
+    - pwd
   extends:
     - .snapcraft
     - .amd64
