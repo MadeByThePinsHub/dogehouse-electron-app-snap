@@ -1,0 +1,39 @@
+include:
+  - project: diddledan/snapcraft-multiarch-gitlab-ci
+    ref: main
+    file: /snapcraft.yml
+  - project: diddledan/snapcraft-multiarch-gitlab-ci
+    ref: main
+    file: /snapcraft-architectures.yml
+
+# Build process
+snapcraft:amd64:
+  extends:
+    - .snapcraft
+    - .amd64
+snapcraft:arm64:
+  extends:
+    - .snapcraft
+    - .arm64
+
+# Publish to Snap Store
+# ref: https://circleci.com/docs/2.0/build-publish-snap-packages/
+.snapcraft:publish:
+  image: cibuilds/snapcraft
+  script:
+    - mkdir .snapcraft
+    # see https://circleci.com/docs/2.0/build-publish-snap-packages/?section=deployment#publishing
+    # in case of GitLab CI, add your $SNAPCRAFT_LOGIN_FILE into your project's Variables in CI settings.
+    - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+    - |
+      for i in *.snap
+      do
+        # available options for release: edge, beta, candidate, stable
+        echo "Publishing $i into Snap Store..."
+        sleep 5
+        snapcraft push $i --release edge || echo "Push failed! Aborting..." && exit 1
+      done
+  only:
+    branches:
+      # edit this if your main branch name is different
+      - master
