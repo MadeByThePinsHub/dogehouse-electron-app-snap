@@ -67,18 +67,14 @@ parts:
         cd baklava
         npm install --production=false
         npx tsc ./src/electron.ts --outDir ./dist
-        npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
+        npx electron-packager . DogeHouse --overwrite --platform=linux --output=release-build --prune=true
         cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
 
         # for validation purposes only
         ls $SNAPCRAFT_PART_INSTALL -al && ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al
 
         # Desktop Icons stuff
-        cp ./icons/icon.png ${SNAP}/usr/share/pixmaps/icon.png
-        curl -o- https://raw.githubusercontent.com/MadeByThePinsHub/dogehouse-electron-app-snap/snap/gui/dogehouse.desktop > dogehouse.desktop
-        cat dogehouse.desktop
-        mv dogehouse.desktop $SNAPCRAFT_PART_INSTALL/usr/share/applications/dogehouse.desktop
-        sed -i 's|Icon=dogehouse|Icon=${SNAP}/usr/share/pixmaps/icon\.png|g' $SNAPCRAFT_PART_INSTALL/usr/share/applications/dogehouse.desktop
+        sed -i 's|Icon=${SNAP}/meta/gui/dogehouse\.png|g' ${SNAP}/meta/gui/dogehouse.desktop
     build-snaps:
     - node/14/stable
     build-packages:
