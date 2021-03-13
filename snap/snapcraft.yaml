@@ -47,7 +47,7 @@ parts:
   dogehouse:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
-    source-branch: staging
+    source-branch: new-design
     build-environment:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
@@ -57,21 +57,27 @@ parts:
         # workaround for build.snapcraft.io builds
         # https://bugs.launchpad.net/bugs/1886861
         if [ -n "$http_proxy" ]; then
-           echo ${http_proxy}
+           echo Proxy detected! It's at ${http_proxy}
            export ELECTRON_GET_USE_PROXY=1
            export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
         fi
 
-        # build stuff goes here
+        # install build stuff
         cd baklava
+        echo "==> Inlnstalling build dependencies..."
         npm install --production=false
+
+        echo "==> Building Electron app..."
         npx tsc ./src/electron.ts --outDir ./dist
         npx electron-packager . DogeHouse --overwrite --platform=linux --output=release-build --prune=true
+
+        echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
 
         # for validation purposes only
-        ls $SNAPCRAFT_PART_INSTALL/usr -al && ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al
+        echo "==> Validating if copied successfully..."
+        ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al || echo "You didn't copied built fipes into the SNAPCRAFT_PART_INSTALL, aborting..."
 
         # Desktop Icons stuff
         #sed -i 's|Icon=DogeHouse|Icon=${SNAP}/meta/gui/dogehouse\.png|g' ${SNAP}/meta/gui/dogehouse.desktop
