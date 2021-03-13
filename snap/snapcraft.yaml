@@ -74,7 +74,7 @@ parts:
         ls $SNAPCRAFT_PART_INSTALL -al && ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al
 
         # Desktop Icons stuff
-        sed -i 's|Icon=${SNAP}/meta/gui/dogehouse\.png|g' ${SNAP}/meta/gui/dogehouse.desktop
+        sed -i 's|Icon=DogeHouse|Icon=${SNAP}/meta/gui/dogehouse\.png|g' ${SNAP}/meta/gui/dogehouse.desktop
     build-snaps:
     - node/14/stable
     build-packages:
