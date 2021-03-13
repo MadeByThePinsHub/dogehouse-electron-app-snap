@@ -66,6 +66,7 @@ parts:
         # build stuff goes here
         cd baklava
         npm install --production=false
+        tsc ./src/electron.ts --outDir ./dist
         npx electron-packager . DogeHouse --icon=./icons/icon.png --overwrite --platform=linux --output=release-build --prune=true
         cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
 
