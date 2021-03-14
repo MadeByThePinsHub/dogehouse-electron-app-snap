@@ -52,7 +52,8 @@ parts:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
         PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
-        npm config set unsafe-perm True
+        NPM_PATH=$(command -v npm)
+        $NPM_PATH config set unsafe-perm True
 
         # workaround for build.snapcraft.io builds
         # https://bugs.launchpad.net/bugs/1886861
