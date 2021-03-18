@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd snap/dogehouse-snap/baklava && npm i && npm run build && electron-builder --linux snap",
     "src:clone": "git clone -b staging https://github.com/benawad/dogehouse snap/dogehouse-src",
-    "src:pull": "cd snap/dogehouse-src && git pull"
+    "src:pull": "cd snap/dogehouse-src && git pull",
     "snapd-checkup": "bash ./bin/snapd-checkup.sh"
   },
   "repository": {
