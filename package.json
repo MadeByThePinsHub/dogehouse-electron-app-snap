@@ -4,8 +4,9 @@
   "description": "Toolkit for building the Electron client app into Snap for the Snap Store.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "bash ./build.sh",
-    "clone-src": "bash ./clone-src.sh",
+    "build": "cd snap/dogehouse-snap/baklava && npm i && npm run build && electron-builder --linux snap",
+    "src:clone": "git clone -b staging https://github.com/benawad/dogehouse snap/dogehouse-src",
+    "src:pull": "cd snap/dogehouse-src && git pull"
     "snapd-checkup": "bash ./bin/snapd-checkup.sh"
   },
   "repository": {

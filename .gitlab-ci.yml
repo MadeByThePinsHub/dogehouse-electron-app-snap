@@ -1,35 +1,27 @@
-include:
-  - project: diddledan/snapcraft-multiarch-gitlab-ci
-    ref: main
-    file: /snapcraft.yml
-  - project: diddledan/snapcraft-multiarch-gitlab-ci
-    ref: main
-    file: /snapcraft-architectures.yml
+image: node:14
 
 # Build process
 snapcraft:amd64:
   before_script:
     - pwd
-  extends:
-    - .snapcraft
-    - .amd64
-snapcraft:arm64:
-  extends:
-    - .snapcraft
-    - .arm64
+  script:
+    - npm run src:clone && npm run build
+  artifacts:
+     paths:
+      - snap/dogehouse-src/baklava/builds
 
 # Publish to Snap Store
 # ref: https://circleci.com/docs/2.0/build-publish-snap-packages/
 .snapcraft:publish:
   image: cibuilds/snapcraft
   dependencies:
-    - snapcraft:arm64
+    # - snapcraft:arm64
     - snapcraft:amd64
   script:
-    - mkdir .snapcraft
     # see https://circleci.com/docs/2.0/build-publish-snap-packages/?section=deployment#publishing
     # in case of GitLab CI, add your $SNAPCRAFT_LOGIN_FILE into your project's Variables in CI settings.
-    - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+    - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snapcraft-login.txt && snapcraft login --with snapcraft-login.txt
+    - cp -rv snap/dogehouse-src/baklava/builds/*.snap .
     - |
       for i in *.snap
       do
