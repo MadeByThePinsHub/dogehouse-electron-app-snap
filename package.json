@@ -1,0 +1,21 @@
+{
+  "name": "@benawad/dogehouse-snap",
+  "version": "0.1.0",
+  "description": "Toolkit for building the Electron client app into Snap for the Snap Store.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bash ./build.sh",
+    "clone-src": "bash ./clone-src.sh",
+    "snapd-checkup": "bash ./bin/snapd-checkup.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/MadeByThePinsHub/snapcrafters/dogehouse.git"
+  },
+  "author": "Andrei Jiroh Eugenio Halili <andreijiroh@madebythepins.tk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/MadeByThePinsHub/snapcrafters/dogehouse/issues"
+  },
+  "homepage": "https://gitlab.com/MadeByThePinsHub/snapcrafters/dogehouse#readme"
+}

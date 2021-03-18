@@ -5,6 +5,10 @@
 *.snap
 .snapcraft
 
+# source files
+/dogehouse-src/
+/snap/dogehouse-src/
+
 __pycache__
 *.pyc
 *_source.tar.bz2

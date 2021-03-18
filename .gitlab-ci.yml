@@ -22,6 +22,9 @@ snapcraft:arm64:
 # ref: https://circleci.com/docs/2.0/build-publish-snap-packages/
 .snapcraft:publish:
   image: cibuilds/snapcraft
+  dependencies:
+    - snapcraft:arm64
+    - snapcraft:amd64
   script:
     - mkdir .snapcraft
     # see https://circleci.com/docs/2.0/build-publish-snap-packages/?section=deployment#publishing
