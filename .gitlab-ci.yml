@@ -1,14 +1,85 @@
-image: node:14
+Projects
+MoreToggle navigation
+S
+Snapcraft Multiarch Gitlab-CI
+Project overview
+Details
+Activity
+Releases
+Repository
+Issues
+0
+Merge Requests
+0
+Requirements
+CI/CD
+Operations
+Packages & Registries
+Analytics
+Wiki
+Snippets
+Members
 
-# Build process
+Close sidebar
+Open sidebar
+Daniel Llewellyn
+Snapcraft Multiarch Gitlab-CI
+S
+Snapcraft Multiarch Gitlab-CI  GDPR
+Project ID: 25013327
+Request Access
+Snapcraft
+Ci
+Multiarch
+6
+ Commits
+2
+ Branches
+0
+ Tags
+461 KB
+ Files
+25.5 MB
+ Storage
+This repo contains a Snapcraft build script for GitLab-CI.
+Project badgeProject badge
+main
+snapcraft-multiarch-gitlab-ci
+ 
+ 
+Name	Last update
+test-projects	1 week ago
+.gitlab-ci.yml	1 week ago
+LICENSE	1 week ago
+README.md	4 days ago
+snapcraft-architectures.yml	1 week ago
+snapcraft.yml	1 week ago
+ README.md
+Snapcraft Multiarch Gitlab-CI
+This repo contains a build script for GitLab CI. You may use this setup by adding the following to your .gitlab-ci.yml config:
+
+include:
+  - project: diddledan/snapcraft-multiarch-gitlab-ci
+    ref: main
+    file: /snapcraft.yml
+  - project: diddledan/snapcraft-multiarch-gitlab-ci
+    ref: main
+    file: /snapcraft-architectures.yml
+
 snapcraft:amd64:
-  before_script:
-    - pwd
-  script:
-    - npm run src:clone && npm run build
+  extends:
+    - .snapcraft
+    - .amd64
   artifacts:
-     paths:
-      - snap/dogehouse-src/baklava/builds
+    paths:
+     - *.snap
+snapcraft:arm64:
+  extends:
+    - .snapcraft
+    - .arm64
+  artifacts:
+    paths:
+     - *.snap
 
 # Publish to Snap Store
 # ref: https://circleci.com/docs/2.0/build-publish-snap-packages/
@@ -21,7 +92,7 @@ snapcraft:amd64:
     # see https://circleci.com/docs/2.0/build-publish-snap-packages/?section=deployment#publishing
     # in case of GitLab CI, add your $SNAPCRAFT_LOGIN_FILE into your project's Variables in CI settings.
     - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snapcraft-login.txt && snapcraft login --with snapcraft-login.txt
-    - cp -rv snap/dogehouse-src/baklava/builds/*.snap .
+    # - cp -rv snap/dogehouse-src/baklava/builds/*.snap .
     - |
       for i in *.snap
       do
