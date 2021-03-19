@@ -1,0 +1,37 @@
+name: Snapcrafting CI/CD
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Snap
+    strategy:
+      matrix:
+        platform:
+        - amd64
+        - arm64
+    steps:
+    - uses: actions/checkout@v2
+    - name: Free disk space
+      run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        sudo apt clean
+        docker rmi $(docker image ls -aq)
+        df -h
+    - uses: docker/setup-qemu-action@v1
+      with:
+        image: tonistiigi/binfmt@sha256:df15403e06a03c2f461c1f7938b171fda34a5849eb63a70e2a2109ed5a778bde
+    - name: Snapcraft it!
+      uses: diddlesnaps/snapcraft-multiarch-action@v1
+      with:
+        architecture: ${{ matrix.platform }}
+    - name: Publish to Snap Store
+      uses: snapcore/action-publish@v1
+      with:
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: edge
