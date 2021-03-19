@@ -47,7 +47,7 @@ parts:
   dogehouse:
     plugin: nil
     source: https://github.com/benawad/dogehouse.git
-    source-branch: new-design
+    source-branch: staging
     build-environment:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
@@ -67,17 +67,17 @@ parts:
         # install build stuff
         cd baklava
         echo "==> Inlnstalling build dependencies..."
-        npm install --production=false
+        npm install
 
         echo "==> Building Electron app..."
-        npx tsc ./src/electron.ts --outDir ./dist
-        npx electron-packager . DogeHouse --overwrite --platform=linux --output=release-build --prune=true
+        npm run build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
-        cp -rv ./DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
+        cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
 
         # for validation purposes only
         echo "==> Validating if copied successfully..."
+        ls $SNAPCRAFT_PART_INSTALL -al
         ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al || echo "You didn't copied built fipes into the SNAPCRAFT_PART_INSTALL, aborting..."
 
         # Desktop Icons stuff
@@ -88,6 +88,7 @@ parts:
     - unzip
     - libcurl4
     - wget
+    - libxkbcommon-x11-0
     stage-packages:
     - libnss3
     - libnspr4
