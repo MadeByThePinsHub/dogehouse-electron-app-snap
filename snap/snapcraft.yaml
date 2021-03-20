@@ -52,7 +52,8 @@ parts:
       - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
     override-build: |
         PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
-        NPM_PATH=$(command -v npm)
+        export NPM_PATH=$(command -v npm)
+        export NODEJS_PATH=$(command -v node)
         $NPM_PATH config set unsafe-perm True
 
         # workaround for build.snapcraft.io builds
@@ -67,10 +68,10 @@ parts:
         # install build stuff
         cd baklava
         echo "==> Inlnstalling build dependencies..."
-        npm install
+        $NODEJS_PATH --max-old-space-size=512 $NPM_PATH install
 
         echo "==> Building Electron app..."
-        npm run build:linux
+        $NODEJS_PATH --max-old-space-size=512 $NPM_PATH run build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
