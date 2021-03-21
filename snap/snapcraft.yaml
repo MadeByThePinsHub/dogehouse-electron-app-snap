@@ -14,13 +14,14 @@ confinement: devmode
 # into core18 until they support Core 20 finally.
 base: core18
 
-# No 32-bit (i386) support as per git-branch:new-design:
-# baklava/package.json scripts, but let's try if it's works.
+# No 32-bit (i386) support as per git-branch:staging:
+# baklava/package.json scripts. And also I don't like to
+# mess up with arm64 again.
 architectures:
   - build-on: amd64
     run-on: amd64
-  - build-on: arm64
-    run-on: arm64
+  #- build-on: arm64
+  #  run-on: arm64
 
 # WORK IN PROGRESS / PLEASE PROCEED AT YOUR OWN RISK
 # Sidenote: This was copied from https://www.electronjs.org/docs/tutorial/snapcraft#step-1-create-sample-snapcraft-project
@@ -68,10 +69,10 @@ parts:
         # install build stuff
         cd baklava
         echo "==> Inlnstalling build dependencies..."
-        $NODEJS_PATH --max-old-space-size=512 $NPM_PATH install
+        DEBUG=* $NODEJS_PATH --max-old-space-size=512 $NPM_PATH install
 
         echo "==> Building Electron app..."
-        $NODEJS_PATH --max-old-space-size=512 $NPM_PATH run build:linux
+        DEBUG=* $NODEJS_PATH --max-old-space-size=512 $NPM_PATH run build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
