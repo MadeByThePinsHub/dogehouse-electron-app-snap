@@ -68,11 +68,13 @@ parts:
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
         fi
 
-        # install build stuff
+        # install Yarn first
         cd baklava
         echo "==> Installing Yarn..."
         DEBUG=* sudo $NODEJS_PATH $NPM_PATH install yarn -g
         export YARN_PATH=$(command -v yarn)
+
+        # finally, install build deps
         echo "==> Installing build deps..."
         DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH install
         cargo install nj-cli
