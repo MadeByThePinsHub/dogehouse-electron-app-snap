@@ -1,7 +1,11 @@
 name: dogehouse
 version: '0.1'
 summary: Taking voice conversations to the moon 🚀
-description: Livestream Discord-like voice rooms
+description: |
+  Livestream Discord-like voice rooms
+
+  To open the app, just type 'dogehouse' on your terminal. Desktop icon soon.
+
 # Since we're still testing the Electron app, we'll go into
 # the edge/devel channel.
 grade: devel
@@ -29,9 +33,7 @@ architectures:
 apps:
   dogehouse:
     command: DogeHouse/DogeHouse --no-sandbox
-    # but actually there's it!
-    # just make sure you update your base into core20
-    # But no, Linus has lied to Ben, again. Blame Snapcraft devs why.
+    # TODO: Migrate to latest LTS, the docs for migration is still WIP.
     extensions: [gnome-3-28]
     plugs:
       - network
@@ -70,9 +72,11 @@ parts:
         cd baklava
         echo "==> Inlnstalling build dependencies..."
         DEBUG=* $NODEJS_PATH --max-old-space-size=512 $NPM_PATH install
+        cargo install nj-cli
 
         echo "==> Building Electron app..."
-        DEBUG=* $NODEJS_PATH --max-old-space-size=512 $NPM_PATH run build:linux
+        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $NPM_PATH run build:globkey
+        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $NPM_PATH run build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
@@ -91,6 +95,8 @@ parts:
     - libcurl4
     - wget
     - libxkbcommon-x11-0
+    - cargo
+    - rustc
     stage-packages:
     - libnss3
     - libnspr4
