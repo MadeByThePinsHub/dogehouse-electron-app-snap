@@ -75,6 +75,12 @@ parts:
         export YARN_PATH=$(command -v yarn)
 
         # finally, install build deps
+        echo "==> Installing and building overlay deps..."
+        cd resources/overlay
+        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH
+        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH build
+        cd ..
+
         echo "==> Installing build deps..."
         DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH install
         cargo install nj-cli
@@ -89,7 +95,7 @@ parts:
         # for validation purposes only
         echo "==> Validating if copied successfully..."
         ls $SNAPCRAFT_PART_INSTALL -al
-        ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al || echo "You didn't copied built fipes into the SNAPCRAFT_PART_INSTALL, aborting..."
+        ls $SNAPCRAFT_PART_INSTALL/DogeHouse -al || echo "You didn't copied built fipes into the SNAPCRAFT_PART_INSTALL, aborting..." && exit 1
 
         # Desktop Icons stuff
         #sed -i 's|Icon=DogeHouse|Icon=${SNAP}/meta/gui/dogehouse\.png|g' ${SNAP}/meta/gui/dogehouse.desktop
