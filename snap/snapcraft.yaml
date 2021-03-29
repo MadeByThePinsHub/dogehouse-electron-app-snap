@@ -71,23 +71,23 @@ parts:
         # install Yarn first
         cd baklava
         echo "==> Installing Yarn..."
-        DEBUG=* sudo $NODEJS_PATH $NPM_PATH install yarn -g
+        DEBUG=* sudo $NPM_PATH install yarn -g
         export YARN_PATH=$(command -v yarn)
 
         # finally, install build deps
         echo "==> Installing and building overlay deps..."
         cd resources/overlay
-        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH
-        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH build
+        DEBUG=* $YARN_PATH
+        DEBUG=* $YARN_PATH build
         cd ../..
 
         echo "==> Installing build deps..."
-        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH install
+        DEBUG=* $YARN_PATH install
         cargo install nj-cli
 
         echo "==> Building Electron app..."
-        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH build:globkey
-        DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH build:linux
+        DEBUG=* $YARN_PATH build:globkey
+        DEBUG=* $YARN_PATH build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
