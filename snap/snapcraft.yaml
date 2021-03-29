@@ -66,6 +66,10 @@ parts:
            export ELECTRON_GET_USE_PROXY=1
            export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
+           npm config set proxy ${http_proxy}
+           npm config set https-proxy ${http_proxy}
+        else
+           echo "No proxy detected, skipping configuring proxy stuff...
         fi
 
         # install Yarn first
