@@ -68,9 +68,9 @@ parts:
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
            npm config set proxy ${http_proxy}
            npm config set https-proxy ${http_proxy}
-           npm config set strict-ssl
+           npm config set strict-ssl false
         else
-           echo "No proxy detected, skipping configuring proxy stuff...
+           echo "No proxy detected, skipping configuring proxy stuff..."
         fi
 
         # install Yarn first
