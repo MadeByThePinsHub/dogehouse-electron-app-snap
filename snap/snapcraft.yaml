@@ -79,7 +79,7 @@ parts:
         cd resources/overlay
         DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH
         DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH build
-        cd ..
+        cd ../..
 
         echo "==> Installing build deps..."
         DEBUG=* $NODEJS_PATH --max-old-space-size=1024 $YARN_PATH install

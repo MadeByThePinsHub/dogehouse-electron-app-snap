@@ -1,5 +1,5 @@
 variables:
-  SNAPCRAFT_PROJECT_ROOT: ${PWD}
+  SNAPCRAFT_PROJECT_ROOT: .
 
 include:
   - project: diddledan/snapcraft-multiarch-gitlab-ci
@@ -18,12 +18,12 @@ snapcraft:amd64:
 #  artifacts:
 #    paths:
 #     - *.snap
-snapcraft:arm64:
-  before_script:
-    - echo $SNAPCRAFT_PROJECT_ROOT
-  extends:
-    - .snapcraft
-    - .arm64
+#snapcraft:arm64:
+#  before_script:
+#    - echo $SNAPCRAFT_PROJECT_ROOT
+#  extends:
+#    - .snapcraft
+#    - .arm64
 #  artifacts:
 #    paths:
 #     - *.snap
