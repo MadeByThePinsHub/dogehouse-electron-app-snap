@@ -68,6 +68,7 @@ parts:
            export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
            npm config set proxy ${http_proxy}
            npm config set https-proxy ${http_proxy}
+           npm config set strict-ssl
         else
            echo "No proxy detected, skipping configuring proxy stuff...
         fi
@@ -75,8 +76,11 @@ parts:
         # install Yarn first
         cd baklava
         echo "==> Installing Yarn..."
-        DEBUG=* sudo $NPM_PATH install yarn -g
+        DEBUG=* sudo $NPM_PATH --unsafe --without-ssl install yarn -g
         export YARN_PATH=$(command -v yarn)
+        if [ -n "${http_proxy}" ]; then
+          yarn config set strict-ssl false
+        fi
 
         # finally, install build deps
         echo "==> Installing and building overlay deps..."
