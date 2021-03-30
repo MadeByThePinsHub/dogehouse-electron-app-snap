@@ -87,11 +87,17 @@ parts:
         cargo install nj-cli
 
         echo "==> Building Electron app..."
-        DEBUG=* $YARN_PATH build:overlay
+        #for the overlay
+        echo "    Running Overlay builder..."
+        cd resources/overlay && yarn install && yarn build && cd ../../
+        # for the global keys
+        echo "    Running Global Keys builder..."
         DEBUG=* $YARN_PATH build:globkey
+        # for building the deb
+        echo "    Building the deb..."
         DEBUG=* $YARN_PATH build:linux
 
-        echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
+        echo "==> Copying build files into ${SNAPCRAFT_PART_INSTALL}..."
         cp -rv ./builds/DogeHouse-*.deb $SNAPCRAFT_PART_INSTALL/DogeHouse
 
         # for validation purposes only
