@@ -52,7 +52,7 @@ parts:
     source: https://github.com/benawad/dogehouse.git
     source-branch: staging
     build-environment:
-      - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin"
+      - PATH: "$PATH:$SNAPCRAFT_PART_BUILD/node_modules/.bin:/root/.cargo/bin:/home/ubuntu/.cargo/bin"
     override-build: |
         PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
         export NPM_PATH=$(command -v npm)
