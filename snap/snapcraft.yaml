@@ -82,23 +82,17 @@ parts:
           yarn config set strict-ssl false
         fi
 
-        # finally, install build deps
-        echo "==> Installing and building overlay deps..."
-        cd resources/overlay
-        DEBUG=* $YARN_PATH
-        DEBUG=* $YARN_PATH build
-        cd ../..
-
         echo "==> Installing build deps..."
         DEBUG=* $YARN_PATH install
         cargo install nj-cli
 
         echo "==> Building Electron app..."
+        DEBUG=* $YARN_PATH build:overlay
         DEBUG=* $YARN_PATH build:globkey
         DEBUG=* $YARN_PATH build:linux
 
         echo "==> CopyIng build files into ${SNAPCRAFT_PART_INSTALL}..."
-        cp -rv ./builds/DogeHouse-* $SNAPCRAFT_PART_INSTALL/DogeHouse
+        cp -rv ./builds/DogeHouse-*.deb $SNAPCRAFT_PART_INSTALL/DogeHouse
 
         # for validation purposes only
         echo "==> Validating if copied successfully..."
